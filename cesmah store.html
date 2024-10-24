@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CESMAH - A fuego lento</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        .font-vintage {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .vintage-border {
+            border: 2px solid #8B4513;
+            box-shadow: 8px 8px 0 rgba(139, 69, 19, 0.2);
+        }
+        
+        .vintage-pattern {
+            background-image: 
+                radial-gradient(#8B4513 2px, transparent 2px),
+                radial-gradient(#8B4513 2px, transparent 2px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body class="bg-amber-50">
+    <!-- Navegación -->
+    <nav class="bg-amber-900 text-white p-4 sticky top-0 z-50 font-vintage">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-3xl font-bold">CESMAH</div>
+            <div class="text-xl italic">A fuego lento</div>
+            <div class="space-x-6">
+                <a href="#inicio" class="hover:text-amber-200">Inicio</a>
+                <a href="#productos" class="hover:text-amber-200">Productos</a>
+                <a href="#recetas" class="hover:text-amber-200">Recetas</a>
+                <a href="#personalizados" class="hover:text-amber-200">Personalizados</a>
+                <a href="#contacto" class="hover:text-amber-200">Contacto</a>
+                <a href="#" id="cart-link" class="hover:text-amber-200"><i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-96 bg-amber-800 vintage-pattern">
+        <img src="/api/placeholder/1200/400" alt="Panadería" class="w-full h-full object-cover opacity-60">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center text-white font-vintage">
+                <h1 class="text-6xl font-bold mb-4 shadow-lg">CESMAH</h1>
+                <p class="text-2xl italic">A fuego lento</p>
+                <p class="mt-4 text-lg">Tradición desde 2024</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Productos Destacados -->
+    <section id="productos" class="container mx-auto py-16">
+        <h2 class="text-3xl font-bold text-center mb-12 text-amber-900 font-vintage">Nuestros Productos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Pan de Muerto -->
+            <div class="bg-white rounded-lg overflow-hidden vintage-border">
+                <img src="/api/placeholder/400/300" alt="Pan de Muerto" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 font-vintage">Pan de Muerto</h3>
+                    <p class="text-gray-600 mb-4">Pan tradicional cubierto de azúcar</p>
+                    <p class="text-xl font-bold text-amber-900">$45.00</p>
+                    <button onclick="addToCart('Pan de Muerto', 45.00)" class="mt-4 bg-amber-900 text-white px-6 py-2 rounded hover:bg-amber-700">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <!-- Roles de Canela -->
+            <div class="bg-white rounded-lg overflow-hidden vintage-border">
+                <img src="/api/placeholder/400/300" alt="Roles de Canela" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 font-vintage">Roles de Canela</h3>
+                    <p class="text-gray-600 mb-4">Suaves y esponjosos con glaseado</p>
+                    <p class="text-xl font-bold text-amber-900">$35.00</p>
+                    <button onclick="addToCart('Roles de Canela', 35.00)" class="mt-4 bg-amber-900 text-white px-6 py-2 rounded hover:bg-amber-700">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <!-- Conchas -->
+            <div class="bg-white rounded-lg overflow-hidden vintage-border">
+                <img src="/api/placeholder/400/300" alt="Conchas" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 font-vintage">Conchas</h3>
+                    <p class="text-gray-600 mb-4">Clásicas o rellenas de diferentes sabores</p>
+                    <p class="text-xl font-bold text-amber-900">$20.00</p>
+                    <button onclick="addToCart('Conchas', 20.00)" class="mt-4 bg-amber-900 text-white px-6 py-2 rounded hover:bg-amber-700">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        let cart = [];
+
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            document.getElementById('cart-count').textContent = cart.length;
+            console.log(`Agregado ${product} al carrito. Precio: $${price}`);
+        }
+
+        document.getElementById('cart-link').addEventListener('click', function() {
+            let cartItems = cart.map(item => `${item.product}: $${item.price}`).join('\\n');
+            alert(`Tu carrito tiene:\\n${cartItems}`);
+        });
+    </script>
+</body>
+</html>
